@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Montrapon — Portfolio</title>
+  <meta name="description" content="Portfolio ของ Montrapon: โครงการ เข้าร่วมแข่งขัน และทักษะ" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f0f11;
+      --card:#16171a;
+      --muted:#a7b0be;
+      --text:#f4f7fb;
+      --accent:#8b5cf6; /* purple */
+      --accent-2:#22d3ee; /* cyan */
+      --radius:18px;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:linear-gradient(180deg,#0e0e11 0%,#0b0c10 100%);color:var(--text);font-family:Prompt,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;}
+    a{color:inherit;text-decoration:none}
+    .container{width:min(1100px,92%);margin-inline:auto}
+
+    /* Navbar */
+    .nav{position:sticky;top:0;z-index:50;background:rgba(15,15,17,.6);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.06)}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:.9rem 0}
+    .brand{display:flex;align-items:center;gap:.6rem;font-weight:700}
+    .brand .logo{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));box-shadow:0 6px 20px rgba(139,92,246,.35)}
+    .nav a.btn{padding:.55rem .9rem;border:1px solid rgba(255,255,255,.12);border-radius:12px}
+    .menu{display:flex;gap:1rem;align-items:center}
+    .menu a{opacity:.85}
+    .menu a:hover{opacity:1}
+    @media (max-width:760px){.menu{display:none}}
+
+    /* Hero */
+    .hero{padding:86px 0 40px 0}
+    .hero-grid{display:grid;grid-template-columns:1.3fr .9fr;gap:28px;align-items:center}
+    .badge{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem .6rem;border:1px solid rgba(255,255,255,.12);border-radius:999px;color:var(--muted);font-size:.9rem}
+    .badge .dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2))}
+    h1{font-size:clamp(28px,4.2vw,44px);line-height:1.15;margin:.6rem 0 1rem}
+    .lead{color:#d8dff0;opacity:.95;font-size:1.05rem}
+    .card{background:linear-gradient(180deg,#16171a,#111214);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .hero .card{padding:18px}
+    .hero .quick{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+    .pill{padding:.55rem .75rem;border-radius:12px;border:1px solid rgba(255,255,255,.08);background:#131417;color:#dbe4ff;font-size:.92rem}
+
+    /* Sections */
+    section{padding:54px 0}
+    .sec-head{display:flex;align-items:end;justify-content:space-between;margin-bottom:18px}
+    .sec-head h2{font-size:clamp(22px,3.2vw,30px);margin:0}
+    .muted{color:var(--muted)}
+
+    /* Grid cards */
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+    .col-4{grid-column:span 4}
+    .col-6{grid-column:span 6}
+    .col-8{grid-column:span 8}
+    .col-12{grid-column:span 12}
+    @media (max-width:980px){.col-6,.col-8{grid-column:span 12}}
+    @media (max-width:720px){.col-4{grid-column:span 12}}
+
+    .card.pad{padding:18px}
+    .accent{background:linear-gradient(135deg,rgba(139,92,246,.18),rgba(34,211,238,.18));border:1px solid rgba(139,92,246,.35)}
+    .tag{display:inline-block;padding:.25rem .6rem;border-radius:999px;border:1px solid rgba(255,255,255,.08);font-size:.82rem;color:#d0d7ea;margin:.2rem .25rem .2rem 0}
+    .tag-btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border: 2px solid rgba(255,215,0,.55);
+  border-radius: 10px;            /* มน ๆ */
+  color: #fce58a;                 /* สีเหลืองทองอ่านง่าย */
+  font-weight: 600;
+  text-decoration: none;
+  background: rgba(255,215,0,0.08);
+  transition: 0.25s ease;
+}
+.tag-btn:hover {
+  background: rgba(255,215,0,0.25);
+  color: #fff6c2;
+}
+
+    /* Timeline */
+    .timeline{position:relative;margin-left:.5rem}
+    .timeline::before{content:"";position:absolute;left:10px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--accent),transparent)}
+    .t-item{position:relative;padding-left:36px;margin:18px 0}
+    .t-item::before{content:"";position:absolute;left:2px;top:.4rem;width:16px;height:16px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));box-shadow:0 0 0 4px rgba(139,92,246,.18)}
+    .t-title{font-weight:600}
+    .t-meta{font-size:.9rem;color:var(--muted)}
+
+    /* Footer */
+    footer{padding:36px 0;color:var(--muted);border-top:1px solid rgba(255,255,255,.06);text-align:center}
+    .cta{display:inline-flex;gap:.6rem;align-items:center;padding:.7rem 1rem;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#0b0c10;font-weight:700}
+
+    /* Utilities */
+    .row{display:flex;gap:10px;flex-wrap:wrap}
+    .mb-8{margin-bottom:8px}
+    .mb-12{margin-bottom:12px}
+    .mb-16{margin-bottom:16px}
+    .btn{display:inline-flex;gap:.5rem;align-items:center;padding:.55rem .9rem;border-radius:12px;border:1px solid rgba(255,255,255,.16);}
+    .btn:hover{background:rgba(255,255,255,.06)}
+    .btn-primary{border-color:rgba(139,92,246,.5)}
+    .btn-secondary{border-color:rgba(34,211,238,.5)}
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="brand"><span class="logo">≋</span> <span>Montrapon</span></div>
+      <div class="menu">
+        <a href="#about">เกี่ยวกับ</a>
+        <a href="#skills">ทักษะ</a>
+        <a href="#projects">ผลงาน</a>
+        <a href="#achievements">การแข่งขัน</a>
+        <a href="#contact" class="btn">ติดต่อ</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="badge"><span class="dot"></span> Portfolio • Computer Science</span>
+        <h1>สวัสดีครับ ผม <br><span style="color:var(--accent)">มนตรพล สังข์วรรณะ</span><br>นักเรียน/ผู้พัฒนา ที่ชอบคอมพิวเตอร์</h1>
+        <p class="lead">สนใจ<span style="color:var(--accent-2)"> Algorithms, Artificial intelligence, Python, Reverse Engineering </span><br>และทำงานร่วมกกันเป็นทีม</p>
+        <div class="row mb-12">
+          <a href="#projects" class="cta">ดูผลงาน</a>
+          <a href="#contact" class="btn" style="border:1px solid rgba(255,255,255,.18);padding:.7rem 1rem;border-radius:12px">ติดต่อ</a>
+        </div>
+        <div class="row">
+          <span class="pill">Coding Thailand 2025: AI-Driven Future</span>
+          <span class="pill">IT Clash: Coding Track (Python)</span>
+          <span class="pill">Bangmod Hackathon (C/C++)</span>
+          <span class="pill">Gaimanee (NanoGPT)</span>
+        </div>
+      </div>
+      <div class="card accent">
+        <div class="grid" style="gap:12px;padding:12px">
+          <div class="col-6 card pad">
+            <div class="mb-8" style="font-weight:700">จุดเด่น</div>
+            <div class="tag">Artificial intelligence</div>
+            <div class="tag">Algorithms</div>
+            <div class="tag">Data Structures</div>
+            <div class="tag">Data Analysis</div>
+          </div>
+          <div class="col-6 card pad">
+            <div class="mb-8" style="font-weight:700">เทคโนโลยี</div>
+            <div class="tag">C/C++</div><div class="tag">Python</div><div class="tag">C#/.NET</div><div class="tag">HTML/CSS</div>
+          </div>
+          <div class="col-12 card pad">
+            <div class="mb-8" style="font-weight:700">เป้าหมาย</div>
+            <p class="muted" style="margin:0">การสร้างสรรค์เทคโนโลยีใหม่ๆ ที่จะสร้างประโยชน์ให้กับสังคมและโลกในอนาคต</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div class="sec-head"><h2>เกี่ยวกับฉัน</h2><span class="muted">About</span></div>
+      <div class="grid">
+        <div class="col-8 card pad">
+          <p>ผมเป็นนักเรียนที่สนใจในสาย <strong>Computer Science</strong>  เทคโนโลยีเป็นสิ่งที่ทำให้ผมรู้สึกทึ่งและหลงใหลมาโดยตลอด ไม่ว่าเวลาจะผ่านไปนานแค่ไหนก็ยังคงมีนวัตกรรมและแนวคิดใหม่ๆ เกิดขึ้นเสมอ</p>
+          <p class="muted">จุดเด่น: ชอบเรียนรู้ ชอบทดลองอะไรใหม่ๆ และทักษะการทำงานร่่วมกันเป็นทีม</p>
+        </div>
+        <div class="col-4 card pad">
+          <div class="mb-8" style="font-weight:700">ข้อมูลย่อ</div>
+          <div class="row">
+            <span class="tag">Bangmod Hackathon</span>
+            <span class="tag">IT Clash</span>
+            <span class="tag">Thailand Cyber Top Talent</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="container">
+      <div class="sec-head"><h2>ทักษะ</h2><span class="muted">Skills</span></div>
+      <div class="grid">
+        <div class="col-6 card pad">
+          <h3 style="margin-top:0">Programming</h3>
+          <div class="row">
+            <span class="tag">C</span>
+            <span class="tag">C++</span>
+            <span class="tag">AI</span>
+            <span class="tag">Python</span>
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+          </div>
+        </div>
+        <div class="col-6 card pad">
+          <h3 style="margin-top:0">CS Fundamentals</h3>
+          <div class="row">
+            <span class="tag">Data Structures</span>
+            <span class="tag">Algorithms</span>
+            <span class="tag">Data Analysis</span>
+            <span class="tag">Teamwork</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="container">
+      <div class="sec-head"><h2>ผลงาน</h2><span class="muted">Projects</span></div>
+      <div class="grid">
+        <!-- Project 1 -->
+        <article class="col-12 card pad" style="border:2px solid var(--accent);">
+          <div class="row" style="align-items:flex-start;gap:14px">
+          <h3 style="margin:0;color:var(--accent)">🏆 Dynamic Ads Based on Audience
+          <span class="tag" style="margin-left:6px;border-color:rgba(255,215,0,.55)">Honorable Prize (รางวัลชมเฉยระดับประเทศ)</span></h3>
+          <p class="muted">โครงงานแข่งขัน Coding Thailand 2025: AI-Driven Future — ใช้กล้องร่วมกับโมเดล <strong>InsightFace</strong> วิเคราะห์เพศ/จำนวนผู้ชม ปรับเปลี่ยนโฆษณาให้ตรงกลุ่มแบบเรียลไทม์ เก็บ <em>log</em> และอัปโหลดแดชบอร์ดผ่าน <strong>Flask API</strong></em> ทำให้ผมเข้าใจวิธีการใช้ โมเดล AI Insightface มากขึ้น และเป็นการฝึกการนำ application เข้าสู่เว็ปไซต์ </p>
+          <div class="row"><span class="tag">Python</span><span class="tag">InsightFace</span><span class="tag">OpenCV</span><span class="tag">Flask</span></div>
+          <p class="muted" style="margin:.5rem 0 0">จัดโดย : สำนักงานส่งเสริมเศรษฐกิจดิจิทัลภายใต้กระทรวงดิจิทัลเพื่อเศรษฐกิจและสังคม (Depa)</p>
+          <div><a class="btn btn-primary" href="https://drive.google.com/file/d/1MrWL1Rmd4AW530qP6XbXQLg0_PAQ0OfM/view?usp=sharing" target="_blank" rel="noopener">ดูเกียรติบัตร</a></div>
+        </article>
+
+        <!-- Project 2 -->
+        <article class="col-12 card pad" style="border:2px solid var(--accent-2);">
+  <div class="row" style="align-items:flex-start;gap:14px">
+    <h3 style="margin:0;color:var(--accent-2)">🏅 Gaimanee — Thai Health Q&A (NanoGPT)
+      <span class="tag" style="margin-left:6px;border-color:rgba(173,216,230,.6)">รองชนะเลิศระดับภูมิภาค</span>
+    </h3>
+    <p class="muted">โมเดล AI ตอบคำถามปัญหาสุขภาพภาษาไทย สร้าง/เทรนด้วย <strong>NanoGPT</strong>; โดยผมออกแบบและเทรนโมเดลด้วยตนเอง ตั้งแต่การทำให้โมเดลเข้าใจภาษาไทย โดยการแปลงข้อความภาษาไทยเป็นชุดตัวเลข (Tokenizer) <strong>จนถึงทำให้โมเดลสามารถตอบคำถามได้จริงผ่านหน้าเว็บด้วย Flask API</strong>. โปรเจกต์นี้ช่วยให้ผมเข้าใจกระบวนการทำงานของ AI มากขึ้น และพัฒนาทักษะด้านการเขียนโปรแกรม</p>
+    <div class="row"><span class="tag">Python</span><span class="tag">NanoGPT</span><span class="tag">Tokenizer</span><span class="tag">Flask</span></div>
+    <p class="muted" style="margin:.5rem 0 0">จัดโดย : เครือข่ายโรงเรียนห้องเรียนพิเศษวิทยาศาสตร์ คณิตศาสตร์ เทคโนโลยีและสิ่งแวดล้อม เครือข่ายภาคใต้ตอนบน (SMTE)</p>
+    <div><a class="btn btn-secondary" href="https://drive.google.com/file/d/1tFoEZ_qYR37AKOVLpiXh39FazZjhYVZm/view?usp=sharing" target="_blank" rel="noopener">ดูเกียรติบัตร</a></div>
+        </article>
+
+        <!-- Project 3 -->
+        <article class="col-6 card pad">
+          <h3 style="margin-top:0">ITCLASH Coding Track 2025<span class="tag" style="margin-left:6px;border-color:rgba(168, 112, 28, 0.6)">เข้าร่วมการแข่งขันได้อันดับ 42 จาก 212 ทีม</span></h3>
+          <p class="muted">แข่งขันแก้โจทย์อัลกอริทึมด้วย <strong>Python</strong> ตั้งแต่ง่ายถึงยาก วัดตรรกะ คณิต และการออกแบบขั้นตอนวิธี ฝึกคิดเป็นระบบและเขียนโปรแกรมภายใต้เวลาจำกัด</p>
+          <div class="row"><span class="tag">Python</span><span class="tag">Algorithms</span><span class="tag">Problem Solving</span></div>
+          <p class="muted" style="margin:.5rem 0 0">จัดโดย : คณะเทคโนโลยีสารสนเทศ สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง</p>
+          <div><a class="btn" href="https://drive.google.com/file/d/1iEgF52rSEqS5rFl5zGYtVfzJcmzL92by/view?usp=sharing" target="_blank" rel="noopener">ดูเกียรติบัตร</a></div>
+        </article>
+
+        <!-- Project 4 -->
+        <article class="col-6 card pad">
+          <h3 style="margin-top:0">Bangmod Hackathon 2025<span class="tag" style="margin-left:6px;border-color:rgba(168, 112, 28, 0.6)">เข้าร่วมการแข่งขันได้เข้ารอบ 36 ทีม</span></h3>
+          <p class="muted">แข่งขันแก้โจทย์ด้วยภาษา <strong>C/C++</strong> เน้นคณิตศาสตร์ อัลกอริทึม และโครงสร้างข้อมูล ได้เข้าใจโปรแกรมเชิงลึกและการทำงานเป็นทีม</p>
+          <div class="row"><span class="tag">C</span><span class="tag">C++</span><span class="tag">Data Structures</span></div>
+          <p class="muted" style="margin:.5rem 0 0">จัดโดย : ภาควิชาวิศวกรรมคอมพิวเตอร์ คณะวิศวกรรมศาสตร์ มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี</p>
+          <div><a class="btn" href="https://drive.google.com/file/d/1cCsFlkWklnAQv7y3hd6S8ALrg1EzNI4t/view?usp=sharing" target="_blank" rel="noopener">ดูเกียรติบัตร</a></div>
+        </article>
+
+        <!-- Project 5 -->
+        <article class="col-6 card pad">
+          <h3 style="margin-top:0">Thailand Cyber Top Talent 2025<span class="tag" style="margin-left:6px;border-color:rgba(168, 112, 28, 0.6)">เข้าร่วมการแข่งขันได้อันดับ 81 จาก 518 ทีม</span></h3>
+          <p class="muted">ได้คะแนน <strong>2601</strong> — แข่งขัน <strong>Cyber Security</strong> ครั้งแรกของผม แนวโจทย์ Network, Website, Application, CTF หา Flag จากข้อมูลที่ซ่อน/เข้ารหัส</p>
+          <div class="row"><span class="tag">Security</span><span class="tag">CTF</span><span class="tag">Networking</span></div>
+          <p class="muted" style="margin:.5rem 0 0">จัดโดย : สำนักงานคณะกรรมการการรักษาความมั่นคงปลอดภัยไซเบอร์แห่งชาติ (สกมช.)</p>
+          <div><a class="btn" href="https://drive.google.com/file/d/1dZ8DhfIZRr1pr5yQVR-J-pkj6FVYqGq-/view?usp=sharing" target="_blank" rel="noopener">ดูเกียรติบัตร</a></div>
+        </article>
+
+        <!-- Project 6 -->
+        <article class="col-6 card pad">
+          <h3 style="margin-top:0">แข่งขันอัจฉริยภาพทางคอมพิวเตอร์<span class="tag" style="margin-left:6px;border-color:rgba(173,216,230,.6)">เหรียญทองแดง(คะแนน >60%)</span></h3>
+          <p class="muted">การสอบครั้งนี้ทำให้ได้พัฒนาทักษะด้านเทคโนโลยีและการคิดเชิงอัลกอริทึม ข้อสอบจะออกเนื้อหาเกี่ยวกับ เทคโนโลยี,วิเคราะห์สถานการณ์, ภาษา Python ทำให้ผมได้ฝึกการแก้ปัญหาอย่างเป็นระบบ</p>
+          <div class="row"><span class="tag">C/C++</span><span class="tag">Algorithms</span><span class="tag">Complexity</span></div>
+          <p class="muted" style="margin:.5rem 0 0">จัดโดย : เครือข่ายโรงเรียนห้องเรียนพิเศษวิทยาศาสตร์ คณิตศาสตร์ เทคโนโลยีและสิ่งแวดล้อม เครือข่ายภาคใต้ตอนบน (SMTE)</p>
+          <div><a class="btn" href="https://drive.google.com/file/d/1FDPz8enoHM5rIvuTcuTbW2bYgL1s6jVd/view?usp=sharing" target="_blank" rel="noopener">ดูเกียรติบัตร</a></div>
+        </article>
+
+        <!-- Extras / Activities -->
+        <article class="col-6 card pad">
+          <h3 style="margin-top:0">Samsung Solve for Tomorrow<span class="tag" style="margin-left:6px;border-color:rgba(168, 112, 28, 0.6)">เข้าร่วมกิจกรรม</span></h3>
+          <p class="muted">เข้าร่วมการแข่งโครงงานนวัตกรรมเกี่่ยวกับการจัดการสิ่งแวดล้อมโดนการประยุกต์ใช้เทคโนโลยีมาแก้ไข</p>
+          <div class="row"><span class="tag">Innovation</span><span class="tag">Environment</span><span class="tag">Technology</span></div>
+          <p class="muted" style="margin:.5rem 0 0">จัดโดย :  บริษัท ไทยซัมซุง อิเลคโทรนิคส์ จำกัด </p>
+          <div><a class="btn" href="https://drive.google.com/file/d/1C6a9vFs6vd1gXh6KDC7OfRtH714x5Ujt/view?usp=sharing" target="_blank" rel="noopener">ดูเกียรติบัตร</a></div>
+        </article>
+
+        <article class="col-6 card pad">
+          <h3 style="margin-top:0">ค่ายวิทย์–คณิต สตรีภูเก็ต @KU กำแพงแสน<span class="tag" style="margin-left:6px;border-color:rgba(168, 112, 28, 0.6)">เข้าร่วมกิจกรรม</span></h3>
+          <p class="muted">เข้าร่วมค่ายวิทยาศาสตร์–คณิตศาสตร์ ทำให้ผมได้ความรู้ทักษะกระบวนการวิทยาศาสตร์ เช่นการสกัด DNA, การใช้เครื่องมือวัดทางไฟฟ้า</p>
+          <div class="row"><span class="tag">SMTE</span><span class="tag">Camp</span></div>
+          <p class="muted" style="margin:.5rem 0 0">จัดโดย : คณะศิลปศาสตร์และวิทยาศาสตร์ มหาวิทยาลัยเกษตรศาสตร์กำแพงแสน</p>
+          <div><a class="btn" href="https://drive.google.com/file/d/1GFA_n-tAP1so7u2RJflKR4_8-IEDm3Ah/view?usp=sharing" target="_blank" rel="noopener">ดูเกียรติบัตร</a></div>
+        </article>
+
+        <article class="col-6 card pad">
+          <h3 style="margin-top:0">Open House โครงการห้องเรียนพิเศษ (ภาคใต้ตอนบน)<span class="tag" style="margin-left:6px;border-color:rgba(168, 112, 28, 0.6)">เข้าร่วมกิจกรรม</span></h3>
+          <p class="muted">ร่วมกิจกรรมวันวิชาการ เปิดบ้านห้องเรียนพิเศษ วิทย์–คณิต–เทคโนโลยี–สิ่งแวดล้อม</p>
+          <div class="row"><span class="tag">SMTE</span><span class="tag">Activity</span></div>
+          <p class="muted" style="margin:.5rem 0 0">จัดโดย : เครือข่ายโรงเรียนห้องเรียนพิเศษวิทยาศาสตร์ คณิตศาสตร์ เทคโนโลยีและสิ่งแวดล้อม เครือข่ายภาคใต้ตอนบน (SMTE)</p>
+          <div><a class="btn" href="https://drive.google.com/drive/folders/1rh2ICEYD7tTehGvV14BkSrU5KAmci8nJ?usp=sharing" target="_blank" rel="noopener">ดูเกียรติบัตร</a></div>
+        </article>
+
+        <article class="col-6 card pad">
+          <h3 style="margin-top:0">อบรม Basic Python & Data Analysis<span class="tag" style="margin-left:6px;border-color:rgba(168, 112, 28, 0.6)">เข้าร่วมกิจกรรม</span></h3>
+          <p class="muted">เรียนการเขียนโปรแกรมพื้นฐานและวิเคราะห์ข้อมูลเบื้องต้น ปูพื้นฐานสู่โครงการ AI/วิทยาการข้อมูล</p>
+          <div class="row"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Data Analysis</span></div>
+          <p class="muted" style="margin:.5rem 0 0">จัดโดย : สำนักงานส่งเสริมเศรษฐกิจดิจิทัลภายใต้กระทรวงดิจิทัลเพื่อเศรษฐกิจและสังคม(Depa)</p>
+          <div><a class="btn" href="https://drive.google.com/drive/folders/1jnELO260au03OJgCWJEsVbFQMrb-bMGr?usp=sharing" target="_blank" rel="noopener">ดูเกียรติบัตร</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACHIEVEMENTS / TIMELINE -->
+  <section id="achievements">
+    <div class="container">
+      <div class="sec-head"><h2>ผลงานการแข่งขัน</h2><span class="muted">Achievements</span></div>
+      <div class="card pad">
+        <div class="timeline">
+          <div class="t-item">
+            <div class="t-title">Coding Thailand 2025 — Dynamic Ads Based on Audience</div>
+            <div class="t-meta">InsightFace + Flask API • วิเคราะห์ผู้ชม ปรับโฆษณาอัตโนมัติ • เก็บ Log/แดชบอร์ด</div>
+          </div>
+          <div class="t-item">
+            <div class="t-title">Gaimanee (NanoGPT) — รองชนะเลิศระดับภูมิภาค</div>
+            <div class="t-meta">โมเดลตอบคำถามสุขภาพภาษาไทย • Sentencepiece • Trian AI</div>
+          </div>
+          <div class="t-item">
+            <div class="t-title">ITCLASH Coding Track 2025</div>
+            <div class="t-meta">โจทย์อัลกอริทึมด้วย Python • Problem Solving ภายใต้เวลาจำกัด</div>
+          </div>
+          <div class="t-item">
+            <div class="t-title">Bangmod Hackathon 2025</div>
+            <div class="t-meta">แก้โจทย์ C/C++ • คณิตศาสตร์ • โครงสร้างข้อมูล</div>
+          </div>
+          <div class="t-item">
+            <div class="t-title">Thailand Cyber Top Talent 2025</div>
+            <div class="t-meta">CTF: Network / Web / App • Encoding</div>
+          </div>
+          <div class="t-item">
+            <div class="t-title">แข่งขันอัจฉริยภาพทางคอมพิวเตอร์</div>
+            <div class="t-meta">อัลกอริทึม + Complexity • ฝึกคิดเชิงระบบ</div>
+          </div>
+          <div class="t-item">
+            <div class="t-title">Samsung Solve for Tomorrow</div>
+            <div class="t-meta">กิจกรรมคิดนวัตกรรมเกี่ยวกับสื่งแวดล้อมด้วยเทคโนโลยี</div>
+          </div>
+          <div class="t-item">
+            <div class="t-title">ค่ายวิทย์–คณิต สตรีภูเก็ต @KU กำแพงแสน</div>
+            <div class="t-meta">ค่ายเสริมประสบการณ์ SMTE • </div>
+          </div>
+          <div class="t-item">
+            <div class="t-title">Open House ห้องเรียนพิเศษ (ภาคใต้ตอนบน)</div>
+            <div class="t-meta">วันวิชาการ • วิทยาศาสตร์ คณิตศาสตร์ เทคโนโลยี สิ่งแวดล้อม</div>
+          </div>
+          <div class="t-item">
+            <div class="t-title">อบรม Basic Python & Data Analysis</div>
+            <div class="t-meta">เขียนโปรแกรมพื้นฐาน • วิเคราะห์ข้อมูลเบื้องต้นด้วย Python</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="sec-head"><h2>ติดต่อ</h2><span class="muted">Contact</span></div>
+      <div class="card pad">
+        <a class="tag" href="mailto:montraponiq@gmail.com">montraponiq@gmail.com</a>
+        <a class="tag" href="https://github.com/qsezy">GitHub</a>
+        <a class="tag" href="https://www.instagram.com/iqsezy/">Instagram</a>
+        </div>
+        <p class="muted">© <span id="y"></span> Montrapon — สร้างด้วย HTML/CSS</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    สุดทางนี้แล้ว ขอบคุณที่มาอ่านนะคับ
+  </footer>
+
+  <script>
+    // แสดงปีปัจจุบันแบบ no-framework
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
