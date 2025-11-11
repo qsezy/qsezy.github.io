@@ -66,21 +66,11 @@
     .card.pad{padding:18px}
     .accent{background:linear-gradient(135deg,rgba(139,92,246,.18),rgba(34,211,238,.18));border:1px solid rgba(139,92,246,.35)}
     .tag{display:inline-block;padding:.25rem .6rem;border-radius:999px;border:1px solid rgba(255,255,255,.08);font-size:.82rem;color:#d0d7ea;margin:.2rem .25rem .2rem 0}
-    .tag-btn {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  border: 2px solid rgba(255,215,0,.55);
-  border-radius: 10px;            /* มน ๆ */
-  color: #fce58a;                 /* สีเหลืองทองอ่านง่าย */
-  font-weight: 600;
-  text-decoration: none;
-  background: rgba(255,215,0,0.08);
-  transition: 0.25s ease;
-}
-.tag-btn:hover {
+    .tag-btn 
+    .tag-btn:hover {
   background: rgba(255,215,0,0.25);
   color: #fff6c2;
-}
+  }
 
     /* Timeline */
     .timeline{position:relative;margin-left:.5rem}
@@ -109,7 +99,7 @@
   <!-- NAV -->
   <nav class="nav">
     <div class="container nav-inner">
-      <div class="brand"><span class="logo">≋</span> <span>Montrapon</span></div>
+      <div><span>Montrapon</span></div>
       <div class="menu">
         <a href="#about">เกี่ยวกับ</a>
         <a href="#skills">ทักษะ</a>
@@ -380,7 +370,6 @@
   </footer>
 
   <script>
-    // แสดงปีปัจจุบันแบบ no-framework
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
 </body>
